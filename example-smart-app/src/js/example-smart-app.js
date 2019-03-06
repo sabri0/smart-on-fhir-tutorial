@@ -40,7 +40,7 @@
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
-          var appointment = getAppointmentTypeValue(byCodes('56446-8'),'67956-3');
+       
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
 
@@ -55,9 +55,7 @@
             p.systolicbp = systolicbp;
           }
 
-          if (typeof appointment != 'undefined') {
-            p.appointment = appointment;
-          }
+       
           if (typeof diastolicbp != 'undefined') {
             p.diastolicbp = diastolicbp;
           }
@@ -86,7 +84,7 @@
       height: {value: ''},
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
-      appointment: {value: ''},
+      
       ldl: {value: ''},
       hdl: {value: ''},
     };
@@ -108,23 +106,7 @@
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
   }
-  function getappointmentValue(BPAppointment,typeOfappointment) {
-    var formattedBPObservations = [];
-    BPAppointment.forEach(function(appointment){
-      var BP = appointment.component.find(function(component){
-        return component.code.coding.find(function(coding) {
-          return coding.code == typeOfappointment;
-        });
-      });
-      if (BP) {
-        appointment.valueQuantity = BP.valueQuantity;
-        formattedBPAppointment.push(appointment);
-      }
-    });
-
-    return getQuantityValueAndUnit(formattedBPAppointment[0]);
-  }
-
+  
   function getQuantityValueAndUnit(ob) {
     if (typeof ob != 'undefined' &&
         typeof ob.valueQuantity != 'undefined' &&
@@ -146,7 +128,7 @@
     $('#height').html(p.height);
     $('#systolicbp').html(p.systolicbp);
     $('#diastolicbp').html(p.diastolicbp);
-    $('#appointment').html(p.appointment);
+ 
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
   };
